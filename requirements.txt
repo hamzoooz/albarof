@@ -1,0 +1,14 @@
+
+asgiref
+Django
+django-ckeditor
+django-js-asset
+pillow
+pydub
+sqlparse
+tzdata
+
+# themezoz.com@gmail.com
+# Hamzoooz@0784512346#themezoz.com
+
+
