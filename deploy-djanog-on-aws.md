@@ -12,6 +12,7 @@ sudo apt-get install postgresql postgresql-contrib
 sudo -u postgres psql
 
 CREATE DATABASE themezoz;
+
 CREATE USER themezoz WITH PASSWORD 'Hamzoooz&0784512346#themezoz.com';
 ALTER ROLE themezoz SET client_encoding TO 'utf8';
 ALTER ROLE themezoz SET default_transaction_isolation TO 'read committed';
@@ -79,8 +80,8 @@ ubuntu
 ~~~bach
 
 [program:gunicorn]
-directory = /home/hamzoooz/ibnkathir/ibnkathir
-command = /home/hamzoooz/env/bin/gunicorn --workers 3 --bind unix:/home/hamzoooz/ibnkathir/ibnkathir/app.sock ibnkathir.wsgi:application
+directory = /home/hamzoooz/albarof/albarof
+command = /home/hamzoooz/env/bin/gunicorn --workers 3 --bind unix:/home/hamzoooz/albarof/albarof/app.sock albarof.wsgi:application
 autostart=true
 autorestart=true
 stderr_logfile= /var/log/gunicorn/gunicorn.err.log
@@ -103,19 +104,19 @@ sudo chown hamzoooz:hamzoooz -R /etc/nginx/nginx.conf
 
 #Step Four NGINX 
 sudo apt install nginx
-sudo nano /etc/nginx/sites-available/ibnkathir.conf
+sudo nano /etc/nginx/sites-available/albarof.conf
 
 
 server {
     listen 80;
-    server_name ibnkathir.net www.ibnkathir.net book-hope.com www.book-hope.com ;
+    server_name albarof.com www.albarof.com ;
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
 	autoindex on;
-        alias /home/hamzoooz/ibnkathir/staticfiles/;
+        alias /home/hamzoooz/albarof/albarof/staticfiles/;
     }
     location /media/ {
-        alias /home/hamzoooz/ibnkathir/media/;
+        alias /home/hamzoooz/albarof/albarof/media/;
     }
     location / {
         include proxy_params;
@@ -125,7 +126,7 @@ server {
 
 cd /etc/nginx/sites-available/
 sudo chown hamzoooz:hamzoooz -R djanog.conf 
-sudo ln /etc/nginx/sites-available/ibnkathir.conf  /etc/nginx/sites-enabled/
+sudo ln /etc/nginx/sites-available/albarof.conf  /etc/nginx/sites-enabled/
 
 sudo service nginx restart
 sudo nginx -t 
