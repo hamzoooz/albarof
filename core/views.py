@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from core.models import Category , Events , Service
+from core.models import Category , Events , Service , SubServers
 # Create your views here.
 def index(request):
     categories = Category.objects.all( )
@@ -15,4 +15,9 @@ def index(request):
         })
 
 
+def subservice(request , id ):
+    service = SubServers.objects.filter(service=id)
 
+    return render(request , 'core/index.html', {
+        "service":service,
+        })

@@ -256,12 +256,12 @@ After=network.target
 [Service]
 User=hamzoooz
 Group=www-data
-WorkingDirectory=/home/hamzoooz/themezoz
-ExecStart=/home/hamzoooz/themezoz/env/bin/gunicorn \
+WorkingDirectory=/home/hamzoooz/albarof/albarof
+ExecStart=/home/hamzoooz/albarof/env/bin/gunicorn \
         --access-logfile - \
         --workers 3 \
         --bind unix:/run/gunicorn.sock \
-        themezoz.wsgi:application
+        hamzoooz.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -286,15 +286,15 @@ sudo systemctl daemon-reload
 sudo systemctl restart gunicorn
 
 
-sudo nano /etc/nginx/sites-available/ibnkathir
+sudo nano /etc/nginx/sites-available/albarof
 
 server {
     listen 80;
-    server_name ibnkathir.com www.ibnkathir.com;
+    server_name albraof.com www.albraof.com;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/hamzoooz/ibnkathir/static;
+        root /home/hamzoooz/albarof/albarof/staticfiles;
     }
 
     location / {
@@ -304,10 +304,10 @@ server {
 
     location /static/ {
         autoindex on;
-        alias /home/hamzoooz/ibnkathir/staticfiles/;
+        alias /home/hamzoooz/albarof/albarof/staticfiles/;
     }
         location /media/ {
-        alias /home/hamzoooz/ibnkathir/media/;
+        alias /home/hamzoooz/albarof/albarof/media/;
     }
 
 }
@@ -340,8 +340,8 @@ sudo systemctl enable postgresql
 sudo systemctl start postgresql
 
 
-sudo systemctl restart gunicorn
 sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
 sudo systemctl restart gunicorn.socket gunicorn.service
 sudo systemctl restart gunicorn.service
 sudo nginx -t && sudo systemctl restart nginx
