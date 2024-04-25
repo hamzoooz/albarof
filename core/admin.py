@@ -8,3 +8,5 @@ admin.site.register(Service)
 admin.site.register(Category)
 
 admin.site.register(Events)
+
+admin.site.register(SubServers)

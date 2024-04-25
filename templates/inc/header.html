@@ -38,7 +38,6 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
 
-
     <body>
 
         <!-- Spinner Start -->
@@ -51,7 +50,7 @@
         <div class="container-fluid nav-bar">
             <div class="container">
                 <nav class="navbar navbar-light navbar-expand-lg py-4">
-                    <a href="index.html" class="navbar-brand">
+                    <a href="/" class="navbar-brand">
 
                         <h1 class="text-primary fw-bold mb-0" style="background-image:url('{% static "/img/core/logo-without-background2.png" %} ');background-size: cover;width: 100px;height: 50px;" ></span> </h1>
                         <!-- {% comment %} <img src="{% static "/img/core/albarof.png" %}" alt="" srcset=""> {% endcomment %} -->
@@ -65,9 +64,11 @@
                             <a href="/" class="nav-item nav-link active">Home</a>
                             <a href="#about-us-section" class="nav-item nav-link">About</a>
                             <a href="#service-section" class="nav-item nav-link">Services</a>
-                            <a href="#event-section" class="nav-item nav-link">Events</a>
-                            <a href="#" class="nav-item nav-link">Menu</a>
-                            <div class="nav-item dropdown">
+
+
+                            {% comment %} <a href="#event-section" class="nav-item nav-link">Events</a> {% endcomment %}
+                            {% comment %} <a href="#" class="nav-item nav-link">Menu</a> {% endcomment %}
+                            {% comment %} <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu bg-light">
                                     <a href="#" class="dropdown-item">Booking</a>
@@ -76,8 +77,10 @@
                                     <a href="#" class="dropdown-item">Testimonial</a>
  
                                 </div>
-                            </div>
-                            <a href="#contact-section " class="nav-item nav-link">Contact</a>
+                            </div> {% endcomment %}
+
+                            <a href="#contact-section" class="nav-item nav-link">Contact</a>
+
                         </div>
                         <button class="btn-search btn btn-primary btn-md-square me-4 rounded-circle d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
                         <a href="" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill">Book Now</a>

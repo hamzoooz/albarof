@@ -1,4 +1,6 @@
-
+:root {
+    --bs-primary: #1e62ab;
+}
 /*** Spinner Start ***/
 #spinner {
     opacity: 0;

@@ -10,19 +10,33 @@
                 <div class="row g-4">
 
                     {% for item in service %}
-                        <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-                            <div class="bg-light rounded service-item">
-                                <div class="service-content d-flex align-items-center justify-content-center p-4">
-                                    <div class="service-content-icon text-center">
-                                        <i class="fas fa-{{ item.icon }} fa-7x text-primary mb-4"></i>
-                                        <h4 class="mb-3">{{ item.title }}</h4>
-                                        <p class="mb-4">{{ item.description }}</p>
-                                        <a href="#" class="btn btn-primary px-4 py-2 rounded-pill">Read More</a>
+                    
+                    <div class="col-lg-3 col-md-6 col-12 wow bounceInUp" data-wow-delay="0.1s">
+                                <a href="{% url 'subservice'  item.id %}">
+                                <div class="bg-light rounded service-item">
+                                    <div class="service-content d-flex align-items-center justify-content-center p-4">
+                                        <div class="service-content-icon text-center">
+
+                                            {% if item.image %}
+                                                <img src="{{ item.image.url }}" style=" width: 68px; margin: 9px; " alt="">
+                                            {% else  %}
+                                            
+                                                <i class="fas fa-{{ item.icon }} fa-7x text-primary mb-4"></i>
+                                            {% endif %}
+
+                                            <h4 class="mb-3">{{ item.title }}</h4>
+                                            <p class="mb-4">{{ item.description }}</p>
+
+                                                                                        
+                                            {% comment %} <a style='position: absolute; top: 333px; right: 35px;' href="{% url 'subservice'  item.id %}" class="btn btn-primary px-4 py-2 rounded-pill">Read More</a> {% endcomment %}
+                                            <a  href="{% url 'subservice'  item.id %}" class="btn btn-primary px-4 py-2 rounded-pill">Read More</a>
+
+
+                                        </div>
                                     </div>
                                 </div>
+                            </a>
                             </div>
-                        </div>
-                    
                     {% endfor %}
 
                 </div>

@@ -14,10 +14,10 @@ def index(request):
         
         })
 
-
+# C:\hamza\files\django\albarof\templates\inc\parts\subservices.html
 def subservice(request , id ):
-    service = SubServers.objects.filter(service=id)
+    
+    subservice = SubServers.objects.filter(id=id)
+    # subservice
+    return render(request , 'core/subservices.html', { "subservice":subservice, })
 
-    return render(request , 'core/index.html', {
-        "service":service,
-        })

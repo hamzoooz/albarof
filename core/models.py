@@ -1,18 +1,19 @@
 from django.db import models
 
-from dynamic_models.models import AbstractModelSchema
+# from dynamic_models.models import AbstractModelSchema
 
 
 # Create your models here, null=True, blank=True.
 class Service(models.Model):
     title =   models.CharField(("title"), max_length=50, null=True, blank=True)
     description = models.CharField(("Description"), max_length=150, null=True, blank=True)
-    # image = models.ImageField(_(""), upload_to="None", height_field=None, width_field=None, max_length=None)
+    image = models.ImageField(upload_to="servers", height_field=None, width_field=None, max_length=None ,null=True, blank=True )
     icon = models.CharField(("icon name"), max_length=50, null=True, blank=True)
     def __str__(self):
         return self.title
 
 class SubServers(models.Model):
+    
     Service = models.ForeignKey(Service ,  on_delete=models.CASCADE ,null=True, blank=True )
     image1 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
     image2 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
@@ -55,7 +56,9 @@ class SubServers(models.Model):
     image39 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
     image40 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
     
-    
+    def __str__(self):
+        return self.Service.title
+
 class Category(models.Model):
     name  = models.CharField(max_length = 150, null=True, blank=True)
     def __str__(self):
@@ -72,12 +75,12 @@ class Events(models.Model):
         return self.title
     
 
-class DynamicModel(AbstractModelSchema):
-    pass
+# class DynamicModel(AbstractModelSchema):
+#     pass
 
-class DynamicField(models.Model):
-    Service = models.ForeignKey(Service ,  on_delete=models.CASCADE ,null=True, blank=True )
-    image1 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
-    model = models.ForeignKey(DynamicModel, on_delete=models.CASCADE, related_name='fields')
-    name = models.CharField(max_length=255)
-    field_type = models.CharField(max_length=50)
+# class DynamicField(models.Model):
+#     Service = models.ForeignKey(Service ,  on_delete=models.CASCADE ,null=True, blank=True )
+#     image1 = models.ImageField(upload_to="SubServers",null=True, blank=True ) 
+#     model = models.ForeignKey(DynamicModel, on_delete=models.CASCADE, related_name='fields')
+#     name = models.CharField(max_length=255)
+#     field_type = models.CharField(max_length=50)

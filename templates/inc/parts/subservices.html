@@ -1,0 +1,56 @@
+<div class="container-fluid service py-6" id="service-section">
+  <div class="container">
+    <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
+      <small
+        class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3"
+        >Our Services</small
+      >
+      <h1 class="display-5 mb-5"> </h1>
+    </div>
+
+    <div class="row g-4">
+      {% for item in subservice %}
+
+      {% comment %} <div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp"    >
+        <div class="bg-light rounded service-item">
+          <div class="service-content d-flex align-items-center justify-content-center p-4">
+            <div class="service-content-icon text-center">  {% endcomment %}
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4  service-content-icon service-content rounded  wow bounceInUp "  data-wow-delay="0.1s"  >
+
+                {% if item.image1 %}
+                    
+                    <div class="col">
+                      <div class="image" style='background-image:url("{{ item.image1.url }}") ; height: 300PX;background-size: contain;background-repeat: no-repeat;background-position: center; ' >  </div>
+                    </div>
+
+                {% endif %}
+                {% if item.image2 %}
+                    
+                    <div class="col">
+                      <div class="image" style='background-image:url("{{ item.image2.url }}") ;height: 300PX;background-size: contain;background-repeat: no-repeat;background-position: center;' >  </div>
+                    </div>
+
+                {% endif %}
+                {% if item.image3 %}
+                    
+                    <div class="col">
+                      <div class="image" style='background-image:url("{{ item.image3.url }}") ;height: 300PX;background-size: contain;background-repeat: no-repeat;background-position: center; ' >  </div>
+                    </div>
+
+                {% endif %}
+
+
+ 
+            </div>
+ 
+
+            {% comment %} </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+
+      {% endfor %}
+    </div>
+  </div>
+</div>
