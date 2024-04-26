@@ -113,14 +113,14 @@ server {
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
 	autoindex on;
-        alias /home/hamzoooz/albarof/albarof/staticfiles/;
+        alias /home/django/albarof/staticfiles/;
     }
     location /media/ {
-        alias /home/hamzoooz/albarof/albarof/media/;
+        alias /home/django/albarof/media/;
     }
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/hamzoooz/ibnkathir/ibnkathir/app.sock;
+        proxy_pass http://unix:/home/django/albraof/app.sock;
     }
 }
 
