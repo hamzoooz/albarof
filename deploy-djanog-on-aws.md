@@ -1,3 +1,5 @@
+mohmadalhadi5@gmail.com
+
 Hamzoooz@0784512346#themezoz.com
 
 sudo apt-get update & sudo apt-get upgrade -y 
@@ -6,6 +8,7 @@ sudo usermod -aG sudo hamzoooz
 sudo visudo # to don't ask for passowrd always 
 # in file add the folloing line   
 hamzoooz  ALL=(ALL) NOPASSWD:ALL   
+themezoz  ALL=(ALL) NOPASSWD:ALL   
 django   ALL=(ALL) NOPASSWD:ALL   
 django  
 sudo apt-get install postgresql postgresql-contrib
@@ -79,9 +82,11 @@ sudo nano /etc/supervisor/conf.d/gunicorn.conf
 ubuntu
 ~~~bach
 
+/home/themezoz.com/albarof
+
 [program:gunicorn]
-directory = /home/hamzoooz/albarof/albarof
-command = /home/hamzoooz/env/bin/gunicorn --workers 3 --bind unix:/home/hamzoooz/albarof/albarof/app.sock albarof.wsgi:application
+directory =/home/themezoz.com/albarof
+command = /home/themezoz.com/env/bin/gunicorn --workers 3 --bind unix:/home/themezoz.com/albarof/albarof/app.sock albarof.wsgi:application
 autostart=true
 autorestart=true
 stderr_logfile= /var/log/gunicorn/gunicorn.err.log
@@ -99,7 +104,7 @@ sudo supervisorctl status
 
 <!-- cange the user  -->
 sudo nano /etc/nginx/nginx.conf
-sudo chown hamzoooz:hamzoooz -R /etc/nginx/nginx.conf
+sudo chown themezoz.com:themezoz.com@gmail.com -R /etc/nginx/nginx.conf
 
 
 #Step Four NGINX 
@@ -113,14 +118,14 @@ server {
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
 	autoindex on;
-        alias /home/django/albarof/staticfiles/;
+        alias /home/themezoz.com/albarof/staticfiles/;
     }
     location /media/ {
-        alias /home/django/albarof/media/;
+        alias /home/themezoz.com/albarof/media/;
     }
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/django/albraof/app.sock;
+        proxy_pass http://unix:/home/themezoz.com/albarof/app.sock;
     }
 }
 
@@ -148,7 +153,9 @@ python manage.py collectstatic
 sudo apt install certbot python3-certbot-nginx -y 
 sudo certbot 
 
-
+[program:gunicorn-albarof.service]
+command = /home/hamzoooz/env/bin/gunicorn albarof.wsgi -b 127.0.0.1:8000 -w 3
+directory = /home/hamzoooz/albarof/
 
 
 sudo ln -s /etc/nginx/sites-available/djanog.conf /etc/nginx/sites-enabled/
@@ -254,14 +261,10 @@ Requires=gunicorn.socket
 After=network.target
 
 [Service]
-User=hamzoooz
+User=themezoz.com@gmail.com
 Group=www-data
-WorkingDirectory=/home/hamzoooz/albarof/albarof
-ExecStart=/home/hamzoooz/albarof/env/bin/gunicorn \
-        --access-logfile - \
-        --workers 3 \
-        --bind unix:/run/gunicorn.sock \
-        hamzoooz.wsgi:application
+WorkingDirectory=/home/themezoz.com/albarof
+ExecStart=/home/themezoz.com/env/bin/gunicorn --access-logfile -  --workers 3 --bind unix:/run/gunicorn.sock albarof.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
@@ -341,8 +344,8 @@ sudo systemctl start postgresql
 
 
 sudo systemctl daemon-reload
-sudo systemctl restart gunicorn
-sudo systemctl restart gunicorn.socket gunicorn.service
+sudo systemctl restart gunicorn.service
+sudo systemctl restart gunicorn.socket gunicorn.service 
 sudo systemctl restart gunicorn.service
 sudo nginx -t && sudo systemctl restart nginx
 
@@ -370,3 +373,51 @@ ExecStart=/home/hamzoooz/env/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \
           ibnkathir.wsgi:application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=themezoz
+Group=www-data
+WorkingDirectory=/home/themezoz/albarof
+ExecStart=/home/themezoz/albarof/env/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          albarof.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+server {
+    listen 80;
+    server_name albarof.com www.albarof.com;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/themezoz/albarof/albarof/staticfiles;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
