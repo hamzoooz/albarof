@@ -9,7 +9,10 @@ sudo visudo # to don't ask for passowrd always
 # in file add the folloing line   
 hamzoooz  ALL=(ALL) NOPASSWD:ALL   
 themezoz  ALL=(ALL) NOPASSWD:ALL   
+ibnKathir  ALL=(ALL) NOPASSWD:ALL   
+alheib  ALL=(ALL) NOPASSWD:ALL   
 django   ALL=(ALL) NOPASSWD:ALL   
+
 django  
 sudo apt-get install postgresql postgresql-contrib
 sudo -u postgres psql
@@ -78,15 +81,11 @@ python manage.py runserver 0.0.0.0:8000
     gunicorn  --bind 0.0.0.0:8000 ibnkathir.wsgi:application
 
 # Step Three Supervisor and gunicorn 
-sudo nano /etc/supervisor/conf.d/gunicorn.conf
-ubuntu
-~~~bach
-
-/home/themezoz.com/albarof
-
+sudo nano /etc/supervisor/conf.d/ibnkathir.conf
+ 
 [program:gunicorn]
-directory =/home/themezoz.com/albarof
-command = /home/themezoz.com/env/bin/gunicorn --workers 3 --bind unix:/home/themezoz.com/albarof/albarof/app.sock albarof.wsgi:application
+directory =/home/ibnkathir/ibnkathir/ibnkathir
+command = /home/ibnkathir/ibnkathir/env/bin/gunicorn --workers 3 --bind unix:/home/ibnkathir/ibnkathir/ibnkathir/ibnkathir/app.sock ibnkathir.wsgi:application
 autostart=true
 autorestart=true
 stderr_logfile= /var/log/gunicorn/gunicorn.err.log
@@ -256,23 +255,23 @@ WantedBy=sockets.target
 sudo nano /etc/systemd/system/gunicorn.service
 
 [Unit]
-Description=gunicorn daemon
-Requires=gunicorn.socket
+Description=ibnkathir daemon
+Requires=ibnkathir.socket
 After=network.target
 
 [Service]
-User=themezoz.com@gmail.com
+User=ibnkathir
 Group=www-data
-WorkingDirectory=/home/themezoz.com/albarof
-ExecStart=/home/themezoz.com/env/bin/gunicorn --access-logfile -  --workers 3 --bind unix:/run/gunicorn.sock albarof.wsgi:application
+WorkingDirectory=/home/ibnkathir/ibnkathir/ibnkathir
+ExecStart=/home/ibnkathir/ibnkathir/env/bin/gunicorn --access-logfile -  --workers 3 --bind unix:/run/gunicorn.sock ibnkathir.wsgi:application
 
 [Install]
 WantedBy=multi-user.target
 
 
 
-sudo systemctl enable gunicorn.socket
-sudo systemctl start gunicorn.socket
+sudo systemctl enable ibnkathir.socket
+sudo systemctl start ibnkathir.socket
 
 sudo systemctl status gunicorn.socket
 
@@ -293,33 +292,28 @@ sudo nano /etc/nginx/sites-available/albarof
 
 server {
     listen 80;
-    server_name albraof.com www.albraof.com;
+    server_name ibnkathir.net www.ibnkathir.net;
 
     location = /favicon.ico { access_log off; log_not_found off; }
-    location /static/ {
-        root /home/hamzoooz/albarof/albarof/staticfiles;
+    
+    location /staticfiles/ {
+        root /home/ibnkathir/ibnkathir/ibnkathir/staticfiles;
     }
 
+        location /media/ {
+        root /home/ibnkathir/ibnkathir/ibnkathir/media;
+    }
     location / {
         include proxy_params;
         proxy_pass http://unix:/run/gunicorn.sock;
     }
-
-    location /static/ {
-        autoindex on;
-        alias /home/hamzoooz/albarof/albarof/staticfiles/;
-    }
-        location /media/ {
-        alias /home/hamzoooz/albarof/albarof/media/;
-    }
-
 }
 
 
 
 
 
-sudo ln -s /etc/nginx/sites-available/themezoz /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/ibnkathir /etc/nginx/sites-enabled
 
 
 sudo nginx -t
@@ -344,9 +338,9 @@ sudo systemctl start postgresql
 
 
 sudo systemctl daemon-reload
-sudo systemctl restart gunicorn.service
-sudo systemctl restart gunicorn.socket gunicorn.service 
-sudo systemctl restart gunicorn.service
+sudo systemctl restart ibnkathir.service
+sudo systemctl enable ibnkathir.socket gunicorn.service 
+sudo systemctl restart ibnkathir.service
 sudo nginx -t && sudo systemctl restart nginx
 
 
