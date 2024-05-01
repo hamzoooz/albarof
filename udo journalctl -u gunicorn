@@ -1,0 +1,17 @@
+[0;1;31m●[0m gunicorn.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; disabled; vendor preset: enabled)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Tue 2024-04-30 14:39:25 UTC; 4s ago
+TriggeredBy: [0;1;32m●[0m gunicorn.socket
+    Process: 11778 ExecStart=/home/themezoz/albarof/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock albarof.wsgi:application [0;1;31m(code=exited, status=1/FAILURE)[0m
+   Main PID: 11778 (code=exited, status=1/FAILURE)
+
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:     self.stop()
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:   File "/home/themezoz/albarof/env/lib/python3.8/site-packages/gunicorn/arbiter.py", line 396, in stop
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:     time.sleep(0.1)
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:   File "/home/themezoz/albarof/env/lib/python3.8/site-packages/gunicorn/arbiter.py", line 242, in handle_chld
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:     self.reap_workers()
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:   File "/home/themezoz/albarof/env/lib/python3.8/site-packages/gunicorn/arbiter.py", line 530, in reap_workers
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]:     raise HaltServer(reason, self.WORKER_BOOT_ERROR)
+Apr 30 14:39:25 themezoz-1 gunicorn[11778]: gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+Apr 30 14:39:25 themezoz-1 systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=1/FAILURE[0m
+Apr 30 14:39:25 themezoz-1 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
