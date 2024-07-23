@@ -89,6 +89,33 @@
         <!-- Template Javascript -->
         {% comment %} <script src="js/main.js"></script> {% endcomment %}
         <script src="{% static "js/main.js" %}"></script>
+        
+ <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.image');
+      const fullscreenOverlay = document.getElementById('fullscreenOverlay');
+      const fullscreenImage = document.getElementById('fullscreenImage');
+      const closeButton = document.getElementById('closeButton');
+
+      images.forEach(image => {
+        image.addEventListener('click', function() {
+          fullscreenImage.style.backgroundImage = this.style.backgroundImage;
+          fullscreenOverlay.style.display = 'flex';
+        });
+      });
+
+      closeButton.addEventListener('click', function() {
+        fullscreenOverlay.style.display = 'none';
+      });
+
+      fullscreenOverlay.addEventListener('click', function(event) {
+        if (event.target === fullscreenOverlay || event.target === fullscreenImage) {
+          fullscreenOverlay.style.display = 'none';
+        }
+      });
+    });
+  </script>
+
 
     </body>
 </html>
