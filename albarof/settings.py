@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "core",
-    
+
 ]
 
 MIDDLEWARE = [
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'albarof.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["templates"],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,5 +131,5 @@ STATICFILES_FINDERS = [
 
 # STATIC_ROOT = "staticfiles"
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
- 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
